@@ -10,14 +10,12 @@ from sklearn.ensemble import RandomForestClassifier
 
 from geopy.geocoders import Nominatim
 
-# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="MediTrack AI",
     page_icon="🏥",
     layout="wide"
 )
 
-# ---------------- CUSTOM THEME HEADER ----------------
 st.markdown(
     """
     <style>
@@ -92,12 +90,10 @@ def get_coordinates(clinic_name, city_name):
     return None, None
 
 
-# ---------------- LIMITED GEOCODING (IMPORTANT FIX) ----------------
 @st.cache_data(show_spinner=False)
 def add_coordinates(df):
     df = df.copy()
 
-    # ONLY unique clinics (NOT full dataset)
     unique = df[["clinic_name", "city_name"]].drop_duplicates().head(15)
 
     lat_map = {}
@@ -114,17 +110,14 @@ def add_coordinates(df):
     return df
 
 
-# ---------------- RUN DATA ----------------
 with st.spinner("Loading data..."):
     df = load_data()
 
-# ⚡ FIX: light map only (no full freeze)
 df = add_coordinates(df)
 
 map_df = df.dropna(subset=["lat", "lon"])
 
 
-# ---------------- SIDEBAR FILTERS ----------------
 st.sidebar.header("🎛 Filters")
 
 city_filter = st.sidebar.multiselect(
