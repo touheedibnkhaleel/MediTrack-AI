@@ -1,0 +1,14 @@
+streamlit
+pandas
+numpy
+plotly
+scikit-learn
+sqlalchemy
+matplotlib
+seaborn
+requests
+openpyxl
+geopy
+folium streamlit-folium
+google-generativeai
+python-dotenv
